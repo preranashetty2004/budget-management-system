@@ -1,0 +1,33 @@
+CREATE TABLE Users (
+    UserID INT PRIMARY KEY AUTO_INCREMENT,
+    Name VARCHAR(100),
+    Email VARCHAR(100) UNIQUE,
+    PasswordHash VARCHAR(255)
+);
+
+CREATE TABLE Income (
+    IncomeID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    Amount DECIMAL(10, 2),
+    Source VARCHAR(100),
+    Date DATE,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE Expenses (
+    ExpenseID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    Amount DECIMAL(10, 2),
+    Category VARCHAR(100),
+    Date DATE,
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
+
+CREATE TABLE Budgets (
+    BudgetID INT PRIMARY KEY AUTO_INCREMENT,
+    UserID INT,
+    Category VARCHAR(100),
+    Limit DECIMAL(10, 2),
+    Period VARCHAR(50),
+    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+);
